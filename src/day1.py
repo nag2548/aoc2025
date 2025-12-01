@@ -9,23 +9,19 @@ def read_file() -> list[str]:
         return f.read().splitlines()
 
 
-def left(curr: int, number: int) -> int:
-    return (curr - number) % TOTAL_NUMBERS
-
-
-def right(curr: int, number: int) -> int:
-    return (curr + number) % TOTAL_NUMBERS
+def shift(curr: int, number: int, right_turn: bool) -> int:
+    factor = 1 if right_turn else -1
+    return (curr + number * factor) % TOTAL_NUMBERS
 
 
 def run() -> int:
     lines = read_file()
     start = 50
     zero_counter = 0
-    moves = {"L": left, "R": right}
 
     for line in lines:
         direction = line[0]
-        start = moves[direction](start, int(line[1:]))
+        start = shift(start, int(line[1:]), direction == "R")
 
         if start == 0:
             zero_counter += 1
