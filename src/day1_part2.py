@@ -1,5 +1,4 @@
-total_numbers = 100
-zeroCounter = 0
+TOTAL_NUMBERS = 100
 
 
 def read_file() -> list[str]:
@@ -8,27 +7,25 @@ def read_file() -> list[str]:
 
 
 def left(curr: int) -> int:
-    return (curr - 1) % total_numbers
+    return (curr - 1) % TOTAL_NUMBERS
 
 
 def right(curr: int) -> int:
-    return (curr + 1) % total_numbers
+    return (curr + 1) % TOTAL_NUMBERS
 
 
 if __name__ == "__main__":
     lines = read_file()
     start = 50
+    zero_counter = 0
+    moves = {"L": left, "R": right}
 
     for line in lines:
-        number = (
-            int(line.lstrip("L")) if line.startswith("L") else int(line.lstrip("R"))
-        )
+        number = int(line[1:])
+
         for _ in range(number):
-            if line.startswith("L"):
-                start = left(start)
-            else:
-                start = right(start)
+            start = moves[line[0]](start)
             if start == 0:
-                zeroCounter += 1
+                zero_counter += 1
         print(f"new start: {start}")
-    print(f"hit zero {zeroCounter} times")
+    print(f"hit zero {zero_counter} times")

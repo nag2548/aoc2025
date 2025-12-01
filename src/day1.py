@@ -17,7 +17,7 @@ def right(curr: int, number: int) -> int:
 if __name__ == "__main__":
     lines = read_file()
     start = 50
-    zeroCounter = 0
+    zero_counter = 0
     moves = {"L": left, "R": right}
 
     for line in lines:
@@ -26,6 +26,6 @@ if __name__ == "__main__":
 
         print(f"new start: {start}")
         if start == 0:
-            zeroCounter += 1
+            zero_counter += 1
 
-    print(f"hit zero {zeroCounter} times")
+    print(f"hit zero {zero_counter} times")
