@@ -1,4 +1,3 @@
-import itertools
 from pathlib import Path
 
 
@@ -10,17 +9,16 @@ def get_input() -> str:
 
 def get_invalid_ids_sum():
     line = get_input()
-    id_list = [pair.split("-") for pair in line.split(",")]
+    id_list = (pair.split("-") for pair in line.split(","))
     id_sum = 0
 
-    for pair in id_list:
-        for i in range(int(pair[0]), int(pair[1]) + 1):
+    for start, end in id_list:
+        for i in range(int(start), int(end) + 1):
             string_value = str(i)
             for chunk in range(1, (len(string_value) // 2) + 1):
                 if len(string_value) % chunk != 0:
                     continue
-                chunks = list(itertools.batched(string_value, chunk))
-                if len({*chunks}) == 1:
+                if string_value == string_value[:chunk] * (len(string_value) // chunk):
                     id_sum += i
                     break
 

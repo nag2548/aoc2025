@@ -9,11 +9,11 @@ def get_input() -> str:
 
 def get_invalid_ids_sum():
     line = get_input()
-    id_list = [pair.split("-") for pair in line.split(",")]
+    id_list = (pair.split("-") for pair in line.split(","))
     id_sum = 0
 
-    for pair in id_list:
-        for i in range(int(pair[0]), int(pair[1]) + 1):
+    for start, end in id_list:
+        for i in range(int(start), int(end) + 1):
             string_value = str(i)
             if len(string_value) % 2 == 0:
                 first = string_value[: (len(string_value) // 2)]
