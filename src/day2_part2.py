@@ -1,3 +1,4 @@
+import itertools
 from pathlib import Path
 
 
@@ -18,11 +19,8 @@ def get_invalid_ids_sum():
             for chunk in range(1, (len(string_value) // 2) + 1):
                 if len(string_value) % chunk != 0:
                     continue
-                chunks = [
-                    string_value[j : j + chunk]
-                    for j in range(0, len(string_value), chunk)
-                ]
-                if all(item == chunks[0] for item in chunks):
+                chunks = list(itertools.batched(string_value, chunk))
+                if len({*chunks}) == 1:
                     id_sum += i
                     break
 
