@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 
 NEIGHBORS = [
@@ -20,20 +19,16 @@ def read_file() -> list[str]:
         return f.read().splitlines()
 
 
-def get_adjacent_rolls(tile, rolls):
-    count = 0
-    for pos in NEIGHBORS:
-        x, y = tile
-        offset_x, offset_y = pos
-        neighbor = (x + offset_x, y + offset_y)
-        if neighbor in rolls:
-            count += 1
-    return count
+def get_adjacent_rolls(roll, rolls):
+    return sum(
+        (roll[0] + offset_x, roll[1] + offset_y) in rolls
+        for offset_x, offset_y in NEIGHBORS
+    )
 
 
 def count_rolls():
     lines = read_file()
-    count, max_y, max_x = 0, len(lines), len(lines[0])
+    count = 0
     rolls = {
         (x, y)
         for y, line in enumerate(lines)
@@ -42,18 +37,15 @@ def count_rolls():
     }
 
     while True:
-        min_rolls = sys.maxsize
-        for row in range(max_y):
-            for col in range(max_x):
-                tile = (col, row)
-                if tile in rolls:
-                    adjacent_rolls = get_adjacent_rolls(tile, rolls)
-                    min_rolls = min(min_rolls, adjacent_rolls)
-                    if adjacent_rolls < 4:
-                        count += 1
-                        rolls.remove(tile)
-        if min_rolls >= 4:
+        rolls_to_remove = set()
+        for roll in rolls:
+            adjacent_rolls = get_adjacent_rolls(roll, rolls)
+            if adjacent_rolls < 4:
+                count += 1
+                rolls_to_remove.add(roll)
+        if len(rolls_to_remove) == 0:
             break
+        rolls = rolls - rolls_to_remove
 
     print(f"roll count: {count}")
     return count
