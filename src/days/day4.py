@@ -1,4 +1,4 @@
-from src.file_helper import read_file_as_list
+from src.helpers.file_helper import read_file_as_list
 
 NEIGHBORS = [
     (-1, -1),
@@ -20,15 +20,29 @@ def get_adjacent_rolls(roll, rolls):
     )
 
 
-def count_rolls():
-    lines = read_file_as_list("day4.txt")
-    count = 0
-    rolls = {
+def build_grid_set(lines: list[str]) -> set[tuple[int, int]]:
+    return {
         (x, y)
         for y, line in enumerate(lines)
         for x, tile in enumerate(line)
         if tile == ROLL
     }
+
+
+def count_rolls():
+    lines = read_file_as_list("day4.txt")
+    rolls = build_grid_set(lines)
+
+    count = sum(get_adjacent_rolls(roll, rolls) < 4 for roll in rolls)
+
+    print(f"roll count: {count}")
+    return count
+
+
+def count_rolls_2():
+    lines = read_file_as_list("day4.txt")
+    count = 0
+    rolls = build_grid_set(lines)
 
     while True:
         rolls_to_remove = set()

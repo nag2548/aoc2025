@@ -1,16 +1,15 @@
 import unittest
 
-import src.day1 as part1
-import src.day1_part2 as part2
+from src.days import day1
 
 
 class Day1Tests(unittest.TestCase):
     def test_part1(self):
-        result = part1.run()
+        result = day1.part1()
         self.assertEqual(992, result, "The result is wrong")
 
     def test_part2(self):
-        result = part2.run()
+        result = day1.part2()
         self.assertEqual(6133, result, "The result is wrong")
 
 

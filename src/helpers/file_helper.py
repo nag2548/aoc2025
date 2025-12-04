@@ -10,6 +10,6 @@ def read_file_as_string(filename: str) -> str:
 
 
 def read(filename: str, mapper):
-    input_path = Path(__file__).parent.parent / "inputs" / filename
+    input_path = Path(__file__).parent.parent.parent / "inputs" / filename
     with open(input_path, "r", encoding="utf-8") as f:
         return mapper(f)
