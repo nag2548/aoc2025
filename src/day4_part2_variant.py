@@ -1,4 +1,4 @@
-from pathlib import Path
+from src.file_helper import read_file_as_list
 
 NEIGHBORS = [
     (-1, -1),
@@ -13,12 +13,6 @@ NEIGHBORS = [
 ROLL = "@"
 
 
-def read_file() -> list[str]:
-    input_path = Path(__file__).parent.parent / "inputs" / "day4.txt"
-    with open(input_path, "r", encoding="utf-8") as f:
-        return f.read().splitlines()
-
-
 def get_adjacent_rolls(roll, rolls):
     return sum(
         (roll[0] + offset_x, roll[1] + offset_y) in rolls
@@ -27,7 +21,7 @@ def get_adjacent_rolls(roll, rolls):
 
 
 def count_rolls():
-    lines = read_file()
+    lines = read_file_as_list("day4.txt")
     count = 0
     rolls = {
         (x, y)

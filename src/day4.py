@@ -1,5 +1,4 @@
-from pathlib import Path
-
+from src.file_helper import read_file_as_list
 
 NEIGHBORS = [
     (-1, -1),
@@ -12,12 +11,6 @@ NEIGHBORS = [
     (1, 1),
 ]
 ROLL = "@"
-
-
-def read_file() -> list[str]:
-    input_path = Path(__file__).parent.parent / "inputs" / "day4.txt"
-    with open(input_path, "r", encoding="utf-8") as f:
-        return f.read().splitlines()
 
 
 def get_adjacent_rolls(tile, tiles):
@@ -38,7 +31,7 @@ def count_rolls():
     count = 0
     tiles = [
         [(x, y, tile) for x, tile in enumerate(line)]
-        for y, line in enumerate(read_file())
+        for y, line in enumerate(read_file_as_list("day4.txt"))
     ]
 
     for row in tiles:

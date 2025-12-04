@@ -1,12 +1,6 @@
-from pathlib import Path
+from src.file_helper import read_file_as_list
 
 TOTAL_NUMBERS = 100
-
-
-def read_file() -> list[str]:
-    input_path = Path(__file__).parent.parent / "inputs" / "day1.txt"
-    with open(input_path, "r", encoding="utf-8") as f:
-        return f.read().splitlines()
 
 
 def shift(curr: int, number: int, right_turn: bool) -> int:
@@ -15,7 +9,7 @@ def shift(curr: int, number: int, right_turn: bool) -> int:
 
 
 def run() -> int:
-    lines = read_file()
+    lines = read_file_as_list("day1.txt")
     start = 50
     zero_counter = 0
 

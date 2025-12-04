@@ -1,14 +1,8 @@
-from pathlib import Path
-
-
-def get_input() -> str:
-    input_path = Path(__file__).parent.parent / "inputs" / "day2.txt"
-    with open(input_path, "r", encoding="utf-8") as f:
-        return f.read()
+from src.file_helper import read_file_as_string
 
 
 def get_invalid_ids_sum():
-    line = get_input()
+    line = read_file_as_string("day2.txt")
     id_list = (pair.split("-") for pair in line.split(","))
     id_sum = 0
 

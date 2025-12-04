@@ -1,18 +1,13 @@
 import sys
-from pathlib import Path
 
-
-def read_file() -> list[str]:
-    input_path = Path(__file__).parent.parent / "inputs" / "day3.txt"
-    with open(input_path, "r", encoding="utf-8") as f:
-        return f.read().splitlines()
+from src.file_helper import read_file_as_list
 
 
 def get_total_joltage() -> int:
     total = 0
     window = 12
 
-    for line in read_file():
+    for line in read_file_as_list("day3.txt"):
         line_result = ""
         n = len(line)
         i = 0
