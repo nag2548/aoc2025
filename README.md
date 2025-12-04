@@ -1,0 +1,3 @@
+# Advent of Code 2025 🎅
+
+[![Pylint](https://github.com/nag2548/aoc2025/actions/workflows/pylint.yml/badge.svg)](https://github.com/nag2548/aoc2025/actions/workflows/pylint.yml)
