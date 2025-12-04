@@ -3,7 +3,7 @@ from pathlib import Path
 
 def read_file() -> list[str]:
     input_path = Path(__file__).parent.parent / "inputs" / "day3.txt"
-    with open(input_path, "r") as f:
+    with open(input_path, "r", encoding="utf-8") as f:
         return f.read().splitlines()
 
 
@@ -14,7 +14,7 @@ def get_total_joltage():
     for line in lines:
         first = int(line[0])
         second = int(line[1])
-        for idx, c in enumerate(line[2:]):
+        for c in line[2:]:
             curr = int(c)
             now = first * 10 + second
             a = first * 10 + curr

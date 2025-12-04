@@ -3,7 +3,7 @@ from pathlib import Path
 
 def get_input() -> str:
     input_path = Path(__file__).parent.parent / "inputs" / "day2.txt"
-    with open(input_path, "r") as f:
+    with open(input_path, "r", encoding="utf-8") as f:
         return f.read()
 
 

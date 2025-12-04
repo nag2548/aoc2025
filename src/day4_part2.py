@@ -17,7 +17,7 @@ ROLL = "@"
 
 def read_file() -> list[str]:
     input_path = Path(__file__).parent.parent / "inputs" / "day4.txt"
-    with open(input_path, "r") as f:
+    with open(input_path, "r", encoding="utf-8") as f:
         return f.read().splitlines()
 
 
