@@ -36,12 +36,10 @@ def get_adjacent_rolls(tile, tiles):
 
 def count_rolls():
     count = 0
-    tiles = []
-    for y, line in enumerate(read_file()):
-        row = []
-        for x, tile in enumerate(line):
-            row.append((x, y, tile))
-        tiles.append(row)
+    tiles = [
+        [(x, y, tile) for x, tile in enumerate(line)]
+        for y, line in enumerate(read_file())
+    ]
 
     for row in tiles:
         for tile in row:
