@@ -18,9 +18,9 @@ jobs:
         run: pip install uv
       - name: Create virtual environment with uv
         run: uv venv
-      - name: Install dependencies with uv
+      - name: Install pylint
+        run: uv pip install pylint
+      - name: Run pylint
         run: |
-          uv pip install -e .
-      - name: Analysing the code with pylint
-        run: |
+          source .venv/bin/activate
           pylint $(git ls-files '*.py')
