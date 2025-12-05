@@ -10,7 +10,7 @@ def count_fresh_ingredients():
     ], list(map(int, file[1].strip().split("\n")))
 
     count = sum(
-        any(id_entry[0] <= ingredient <= id_entry[1] for id_entry in ingredient_ids)
+        any(start <= ingredient <= end for (start, end) in ingredient_ids)
         for ingredient in available_ingredients
     )
     print(f"fresh ingredients: {count}")
@@ -37,7 +37,7 @@ def count_fresh_ingredients_2():
                 end = max(end, end_other)
         merged_id_ranges.append((start, end))
 
-    count = sum(r[1] - r[0] + 1 for r in merged_id_ranges)
+    count = sum(end - start + 1 for (start, end) in merged_id_ranges)
     print(f"fresh ingredients: {count}")
     return count
 
