@@ -9,8 +9,8 @@ class Day5Tests(unittest.TestCase):
         self.assertEqual(640, count)
 
     def test_part2(self):
-        count = day5.count_fresh_ingredients()
-        self.assertEqual(3, count)
+        count = day5.count_fresh_ingredients_2()
+        self.assertEqual(365804144481581, count)
 
 
 if __name__ == "__main__":
