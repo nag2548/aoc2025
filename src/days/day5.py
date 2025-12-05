@@ -44,3 +44,4 @@ def count_fresh_ingredients_2():
 
 if __name__ == "__main__":
     count_fresh_ingredients()
+    count_fresh_ingredients_2()
