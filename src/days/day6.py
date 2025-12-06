@@ -1,10 +1,10 @@
-import operator
+import numpy as np
 
 from src.helpers.file_helper import read_file_as_list
 
 OPERATOR_MAP = {
-    "+": operator.add,
-    "*": operator.mul,
+    "+": np.sum,
+    "*": np.prod,
 }
 
 
@@ -20,10 +20,7 @@ def solve_worksheet():
     total = 0
     for i, problem in enumerate(problems):
         op = OPERATOR_MAP[operators[i]]
-        result = 0 if operators[i] == "+" else 1
-        for a in problem:
-            result = op(result, a)
-        total += result
+        total += op(problem)
 
     print(f"total: {total}")
     return total
@@ -31,30 +28,24 @@ def solve_worksheet():
 
 def solve_worksheet_2():
     lines = read_file_as_list("day6.txt")
-    problems = {}
-    operators = list(
-        map(
-            lambda o: operator.add if o == "+" else operator.mul,
-            reversed(lines[-1].split()),
-        )
-    )
+    problems = ["" for _ in range(len(lines[0]))]
+    operators = list(reversed(lines[-1].split()))
 
     for line in lines[:-1]:
         for col, x in enumerate(line):
-            problems[col] = problems.get(col, "") + x
+            problems[col] = problems[col] + x
 
-    total = 0
-    i = 0
-    line_result = 0 if operators[i] == operator.add else 1
-    for _, value in sorted(problems.items(), reverse=True):
+    total = i = 0
+    col_numbers = []
+    for value in reversed(problems):
         stripped = value.strip()
         if not stripped:
+            total += OPERATOR_MAP[operators[i]](col_numbers)
+            col_numbers = []
             i += 1
-            total += line_result
-            line_result = 0 if operators[i] == operator.add else 1
             continue
-        line_result = operators[i](line_result, int(value))
-    total += line_result
+        col_numbers.append(int(value))
+    total += OPERATOR_MAP[operators[-1]](col_numbers)
 
     print(f"total: {total}")
     return total
