@@ -11,11 +11,8 @@ OPERATOR_MAP = {
 def solve_worksheet():
     lines = read_file_as_list("day6.txt")
     operators = lines[-1].split()
-    problems = [[] for _ in range(len(lines[0].split()))]
-    for row in lines[:-1]:
-        splits = row.split()
-        for col, split in enumerate(splits):
-            problems[col].append(int(split))
+    rows = [list(map(int, row.split())) for row in lines[:-1]]
+    problems = list(zip(*rows))
 
     total = 0
     for problem, op_symbol in zip(problems, operators):
