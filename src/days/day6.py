@@ -18,8 +18,8 @@ def solve_worksheet():
             problems[col].append(int(split))
 
     total = 0
-    for i, problem in enumerate(problems):
-        op = OPERATOR_MAP[operators[i]]
+    for problem, op_symbol in zip(problems, operators):
+        op = OPERATOR_MAP[op_symbol]
         total += op(problem)
 
     print(f"total: {total}")
