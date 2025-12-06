@@ -10,7 +10,7 @@ def solve_worksheet():
     problems = [["0"] * rows for _ in range(cols)]
 
     for row in range(rows):
-        splits = [x for x in lines[row].split()]
+        splits = list(lines[row].split())
         for col in range(cols):
             problems[col][row] = splits[col]
 
@@ -28,5 +28,20 @@ def solve_worksheet():
     return total
 
 
+def solve_worksheet_2():
+    lines = read_file_as_list("day6_example.txt")
+    rows = len(lines)
+    cols = len(lines[0].split())
+    problems = [["0"] * rows for _ in range(cols)]
+
+    for row in range(rows):
+        splits = list(lines[row].split())
+        for col in range(cols):
+            problems[col][row] = splits[col]
+
+    return 0
+
+
 if __name__ == "__main__":
     solve_worksheet()
+    solve_worksheet_2()
