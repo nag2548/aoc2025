@@ -2,26 +2,27 @@ import operator
 
 from src.helpers.file_helper import read_file_as_list
 
+OPERATOR_MAP = {
+    "+": operator.add,
+    "*": operator.mul,
+}
+
 
 def solve_worksheet():
     lines = read_file_as_list("day6.txt")
-    rows = len(lines)
-    cols = len(lines[0].split())
-    problems = [["0"] * rows for _ in range(cols)]
-
-    for row in range(rows):
-        splits = list(lines[row].split())
-        for col in range(cols):
-            problems[col][row] = splits[col]
+    operators = lines[-1].split()
+    problems = [[] for _ in range(len(lines[0].split()))]
+    for row in lines[:-1]:
+        splits = row.split()
+        for col, split in enumerate(splits):
+            problems[col].append(int(split))
 
     total = 0
-    for problem in problems:
-        last = problem[-1]
-        operation = operator.add if last == "+" else operator.mul
-
-        result = int(problem[0])
-        for a in problem[1:-1]:
-            result = operation(result, int(a))
+    for i, problem in enumerate(problems):
+        op = OPERATOR_MAP[operators[i]]
+        result = 0 if operators[i] == "+" else 1
+        for a in problem:
+            result = op(result, a)
         total += result
 
     print(f"total: {total}")
