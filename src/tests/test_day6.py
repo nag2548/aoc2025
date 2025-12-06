@@ -10,7 +10,7 @@ class TestDay6(unittest.TestCase):
 
     def test_part_2(self):
         result = day6.solve_worksheet_2()
-        self.assertEqual(6605396225322, result)
+        self.assertEqual(11052310600986, result)
 
 
 if __name__ == "__main__":

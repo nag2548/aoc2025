@@ -29,17 +29,34 @@ def solve_worksheet():
 
 
 def solve_worksheet_2():
-    lines = read_file_as_list("day6_example.txt")
-    rows = len(lines)
-    cols = len(lines[0].split())
-    problems = [["0"] * rows for _ in range(cols)]
+    lines = read_file_as_list("day6.txt")
+    problems = {}
+    operators = list(
+        map(
+            lambda o: operator.add if o == "+" else operator.mul,
+            reversed(lines[-1].split()),
+        )
+    )
 
-    for row in range(rows):
-        splits = list(lines[row].split())
-        for col in range(cols):
-            problems[col][row] = splits[col]
+    for line in lines[:-1]:
+        for col, x in enumerate(line):
+            problems[col] = problems.get(col, "") + x
 
-    return 0
+    total = 0
+    i = 0
+    line_result = 0 if operators[i] == operator.add else 1
+    for _, value in sorted(problems.items(), reverse=True):
+        stripped = value.strip()
+        if not stripped:
+            i += 1
+            total += line_result
+            line_result = 0 if operators[i] == operator.add else 1
+            continue
+        line_result = operators[i](line_result, int(value))
+    total += line_result
+
+    print(f"total: {total}")
+    return total
 
 
 if __name__ == "__main__":
