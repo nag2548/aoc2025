@@ -10,7 +10,7 @@ class TestDay7(unittest.TestCase):
 
     def test_part_2(self):
         count = day7.count_splits_2()
-        self.assertEqual(40, count)
+        self.assertEqual(17921968177009, count)
 
 
 if __name__ == "__main__":

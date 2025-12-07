@@ -43,11 +43,27 @@ def count_splits():
     return split_count
 
 
-def count_splits_2():
-    lines = read_file_as_list("day7_example.txt")
-    manifold, start = init_manifold(lines)
+def factorial(pos, manifold, factorial_memo):
+    x, y = pos
+    if pos not in manifold:
+        return 1
+    if pos not in factorial_memo:
+        if manifold[pos][2] == SPLITTER:
+            factorial_memo[pos] = factorial(
+                (x - 1, y), manifold, factorial_memo
+            ) + factorial((x + 1, y), manifold, factorial_memo)
+        else:
+            factorial_memo[pos] = factorial((x, y + 1), manifold, factorial_memo)
+    return factorial_memo[pos]
 
-    return 0
+
+def count_splits_2():
+    lines = read_file_as_list("day7.txt")
+    manifold, start = init_manifold(lines)
+    factorial_memo = {}
+    timeline_count = factorial(start, manifold, factorial_memo)
+    print(f"timeline count: {timeline_count}")
+    return timeline_count
 
 
 if __name__ == "__main__":
