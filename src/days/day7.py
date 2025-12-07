@@ -25,7 +25,8 @@ def count_splits():
             x, y = beam
             if beam not in manifold:
                 break
-            elif manifold[beam] == SPLITTER:
+
+            if manifold[beam] == SPLITTER:
                 split_count += 1
                 next_beams.add((x - 1, y + 1))
                 next_beams.add((x + 1, y + 1))
