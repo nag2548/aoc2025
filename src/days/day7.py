@@ -43,25 +43,25 @@ def count_splits():
     return split_count
 
 
-def factorial(pos, manifold, factorial_memo):
+def paths(pos, manifold, path_memo):
     x, y = pos
     if pos not in manifold:
         return 1
-    if pos not in factorial_memo:
+    if pos not in path_memo:
         if manifold[pos] == SPLITTER:
-            factorial_memo[pos] = factorial(
-                (x - 1, y), manifold, factorial_memo
-            ) + factorial((x + 1, y), manifold, factorial_memo)
+            path_memo[pos] = paths((x - 1, y), manifold, path_memo) + paths(
+                (x + 1, y), manifold, path_memo
+            )
         else:
-            factorial_memo[pos] = factorial((x, y + 1), manifold, factorial_memo)
-    return factorial_memo[pos]
+            path_memo[pos] = paths((x, y + 1), manifold, path_memo)
+    return path_memo[pos]
 
 
 def count_splits_2():
     lines = read_file_as_list("day7.txt")
     manifold, start = init_manifold(lines)
-    factorial_memo = {}
-    timeline_count = factorial(start, manifold, factorial_memo)
+    path_memo = {}
+    timeline_count = paths(start, manifold, path_memo)
     print(f"Timeline count: {timeline_count}")
     return timeline_count
 
