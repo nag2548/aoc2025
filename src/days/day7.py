@@ -6,17 +6,20 @@ SPLITTER = "^"
 START = "S"
 
 
-def count_splits():
-    lines = read_file_as_list("day7.txt")
-    manifold = {}
-    start = None
+def init_manifold(lines: list[str]):
+    manifold, start = {}, None
     for row, line in enumerate(lines):
         for col, char in enumerate(line):
             manifold[(col, row)] = (col, row, char)
             if char == START:
                 start = (col, row)
-    split_count = 0
-    unique_split_locations = set()
+    return manifold, start
+
+
+def count_splits():
+    lines = read_file_as_list("day7.txt")
+    manifold, start = init_manifold(lines)
+    split_count, unique_split_locations = 0, set()
     queue = [start]
     while queue:
         x, y = queue.pop(0)
@@ -36,6 +39,12 @@ def count_splits():
 
     print(f"Split count: {split_count}")
     return split_count
+
+
+def count_splits_2():
+    lines = read_file_as_list("day7_example.txt")
+    manifold, start = init_manifold(lines)
+    return None
 
 
 if __name__ == "__main__":

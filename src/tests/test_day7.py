@@ -8,6 +8,10 @@ class TestDay7(unittest.TestCase):
         count = day7.count_splits()
         self.assertEqual(1592, count)
 
+    def test_part_2(self):
+        count = day7.count_splits_2()
+        self.assertEqual(40, count)
+
 
 if __name__ == "__main__":
     unittest.main()
