@@ -32,10 +32,12 @@ def count_splits():
                     continue
                 unique_split_locations.add((next_x, next_y))
                 split_count += 1
-                if (next_x - 1, next_y) in manifold:
-                    queue.append((next_x - 1, next_y))
-                if (next_x + 1, next_y) in manifold:
-                    queue.append((next_x + 1, next_y))
+                left = (next_x - 1, next_y)
+                if left in manifold:
+                    queue.append(left)
+                right = (next_x + 1, next_y)
+                if right in manifold:
+                    queue.append(right)
 
     print(f"Split count: {split_count}")
     return split_count
@@ -44,8 +46,10 @@ def count_splits():
 def count_splits_2():
     lines = read_file_as_list("day7_example.txt")
     manifold, start = init_manifold(lines)
-    return None
+
+    return 0
 
 
 if __name__ == "__main__":
     count_splits()
+    count_splits_2()
