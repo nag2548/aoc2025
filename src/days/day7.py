@@ -1,5 +1,3 @@
-from collections import deque
-
 from src.helpers.file_helper import read_file_as_list
 
 SPLITTER = "^"
@@ -19,25 +17,21 @@ def init_manifold(lines: list[str]):
 def count_splits():
     lines = read_file_as_list("day7.txt")
     manifold, start = init_manifold(lines)
-    split_count, visited_splits = 0, set()
-    queue = deque([start])
-    while queue:
-        x, y = queue.popleft()
-        below = (x, y + 1)
-        if below not in manifold:
-            continue
-        next_char = manifold[below]
-        if next_char == SPLITTER:
-            if below in visited_splits:
-                continue
-            visited_splits.add(below)
-            split_count += 1
-            for dx in (-1, 1):
-                side = (x + dx, y + 1)
-                if side in manifold:
-                    queue.append(side)
-        else:
-            queue.append(below)
+    split_count = 0
+    beams = {start}
+    while beams:
+        next_beams = set()
+        for beam in beams:
+            x, y = beam
+            if beam not in manifold:
+                break
+            elif manifold[beam] == SPLITTER:
+                split_count += 1
+                next_beams.add((x - 1, y + 1))
+                next_beams.add((x + 1, y + 1))
+            else:
+                next_beams.add((x, y + 1))
+        beams = next_beams
 
     print(f"Split count: {split_count}")
     return split_count
