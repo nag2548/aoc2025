@@ -13,7 +13,7 @@ def solve_1(connections):
     vectors = [tuple(map(int, line.split(","))) for line in lines]
 
     distances, nodes = init_edges_and_nodes(vectors)
-    edges = sorted(distances, key=itemgetter(2))[slice(connections)]
+    edges = sorted(distances, key=itemgetter(2))[:connections]
     graph = defaultdict(list)
     for a, b, _ in edges:
         graph[a].append(b)
