@@ -1,4 +1,5 @@
 from collections import defaultdict
+from math import dist
 from operator import itemgetter
 from typing import Any
 
@@ -65,18 +66,8 @@ def init_edges_and_nodes(vectors: list[tuple[int, ...]]) -> tuple[list[Any], set
     nodes = set()
     for i, a in enumerate(vectors):
         nodes.add(a)
-        x1, y1, z1 = a
         for b in vectors[i + 1 :]:
-            x2, y2, z2 = b
-            distances.append(
-                (
-                    a,
-                    b,
-                    np.sqrt(
-                        np.pow(x1 - x2, 2) + np.pow(y1 - y2, 2) + np.pow(z1 - z2, 2)
-                    ),
-                )
-            )
+            distances.append((a, b, dist(a, b)))
     return distances, nodes
 
 
