@@ -25,7 +25,7 @@ def solve_1(connections):
             dfs(node, nodes, graph, group)
         groups.append(group)
 
-    lengths = [len(group) for group in sorted(groups, key=len, reverse=True)]
+    lengths = sorted([len(group) for group in groups], reverse=True)
     result = np.prod(lengths[:3])
     print(f"result: {result}")
     return result
