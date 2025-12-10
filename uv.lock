@@ -8,7 +8,6 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "black" },
-    { name = "numpy" },
     { name = "pylint" },
     { name = "python-dotenv" },
     { name = "requests" },
@@ -18,7 +17,6 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "black", specifier = ">=25.12.0" },
-    { name = "numpy", specifier = "==2.3.5" },
     { name = "pylint", specifier = "==4.0.4" },
     { name = "python-dotenv", specifier = "==1.2.1" },
     { name = "requests", specifier = ">=2.32.5" },

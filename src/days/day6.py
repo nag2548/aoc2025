@@ -1,10 +1,10 @@
-import numpy as np
+import math
 
 from src.helpers.file_helper import read_file_as_list
 
 OPERATOR_MAP = {
-    "+": np.sum,
-    "*": np.prod,
+    "+": sum,
+    "*": math.prod,
 }
 
 
