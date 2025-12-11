@@ -4,7 +4,6 @@ from src.helpers.file_helper import read_file_as_list
 
 
 def path_counter(graph, start):
-    graph = graph
     memo = {}
 
     def find_paths_2(node, visited):
