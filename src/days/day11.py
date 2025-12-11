@@ -32,14 +32,10 @@ def find_paths(node, graph):
 
 
 def init_graph(lines: list[str]) -> dict[str, List[str]]:
-    graph = {}
-    for line in lines:
-        split = line.split(": ")
-        graph[split[0]] = split[1].split(" ")
-    return graph
+    return {k: v.split() for k, v in (line.split(": ") for line in lines)}
 
 
-def solve():
+def part1():
     lines = read_file_as_list("day11.txt")
     graph = init_graph(lines)
 
@@ -48,7 +44,7 @@ def solve():
     return paths
 
 
-def solve_2():
+def part2():
     lines = read_file_as_list("day11.txt")
     graph = init_graph(lines)
     paths = path_counter(graph, "svr")
@@ -57,5 +53,5 @@ def solve_2():
 
 
 if __name__ == "__main__":
-    solve()
-    solve_2()
+    part1()
+    part2()
